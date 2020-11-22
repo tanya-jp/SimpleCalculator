@@ -34,7 +34,7 @@ public class NormalCalculator extends Calculator{
     @Override
     public void setButton()
     {
-        calculatorGUI.setKeyboardPanel(4, 3);
+        calculatorGUI.setKeyboardPanel(5, 3);
         super.setButton();
     }
 
@@ -47,6 +47,5 @@ public class NormalCalculator extends Calculator{
     {
         return super.getCalculatorGUI();
     }
-
 
 }

@@ -8,16 +8,21 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
+import java.security.PrivateKey;
 
 public class CalculatorGUI {
     JFrame calcFrame;
     JPanel keyboardPanel;
+    JTextArea display;
+    JScrollPane scrollPane;
 
     /**
      * Constructor of this class which makes a new GUI
      */
     public CalculatorGUI()
     {
+        display = new JTextArea();
+        display.setToolTipText("Entered numbers");
         calcFrame = new JFrame();
         keyboardPanel = new JPanel();
         calcFrame.setTitle("Calculator");
@@ -62,17 +67,37 @@ public class CalculatorGUI {
     /**
      * Adds a window with scroller to the main window.
      */
-    public void displayGUI()
+    public void setScrollPane()
     {
-        JTextArea display = new JTextArea();
+        scrollPane = new JScrollPane(display);
         display.setEditable(false);
         display.setFont(new Font("Arial", 14,14));
-        JScrollPane scrollPane = new JScrollPane(display);
         scrollPane.setSize(200, 100);
         scrollPane.setLocation(50,20);
-        for (int i = 0; i < 100; i++)
-            display.append("I= "+ i);
         calcFrame.add(scrollPane);
+    }
+
+    /**
+     * Adds clicked button to display
+     * @param button as clicked button
+     */
+    public void addByMouse(String  button)
+    {
+        display.append(button);
+    }
+
+    public void addByKey(char button)
+    {
+        display.append(String.valueOf(button));
+    }
+
+    /**
+     * Returns Scroll pane
+     * @return scroll pane
+     */
+    public JScrollPane getScrollPane()
+    {
+        return scrollPane;
     }
 
     /**
@@ -82,6 +107,15 @@ public class CalculatorGUI {
     public JFrame getCalcFrame()
     {
         return calcFrame;
+    }
+
+    /**
+     * Returns display
+     * @return display
+     */
+    public JTextArea  getDisplay()
+    {
+        return display;
     }
 
 

@@ -6,6 +6,7 @@ package com.company;
  */
 
 import javax.swing.*;
+import java.awt.event.*;
 
 public class Calculator {
     //main template
@@ -25,10 +26,21 @@ public class Calculator {
      */
     public void setNewButton(String str)
     {
-        JButton btn = new JButton();
-        btn.setText(str);
+        JButton btn = new JButton(str);
+        btn.setToolTipText("This button is: " + str);
         calculatorGUI.setButton(btn);
-
+        btn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                calculatorGUI.addByMouse(str);
+            }
+        });
+        btn.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                calculatorGUI.addByKey(e.getKeyChar());
+            }
+        });
     }
 
     /**
@@ -36,11 +48,15 @@ public class Calculator {
      */
     public void setButton()
     {
+        calculatorGUI.setScrollPane();
         for (int i = 1; i <= 9; i++)
             setNewButton("" + i);
         setNewButton("+");
         setNewButton("0");
+        setNewButton("-");
+        setNewButton("*");
         setNewButton("=");
+        setNewButton("/");
     }
 
     /**
@@ -49,7 +65,6 @@ public class Calculator {
      */
     public CalculatorGUI getCalculatorGUI()
     {
-        calculatorGUI.displayGUI();
         return calculatorGUI;
     }
 
